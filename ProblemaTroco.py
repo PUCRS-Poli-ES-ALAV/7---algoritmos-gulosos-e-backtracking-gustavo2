@@ -17,7 +17,7 @@ def problema_troco(moedas, valor):
 
 
 moedas = [2, 5, 10]
-valor = 17
+valor = 11
 resultado = problema_troco(moedas, valor)
 
 print(resultado)
