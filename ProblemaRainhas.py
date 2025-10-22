@@ -6,41 +6,33 @@ import numpy as np
 
 def verificar_rainha(tabuleiro, posicao):
     n = tabuleiro.shape[0]
-    atual = posicao.copy()
+    i,j = posicao
 
-    while(atual[1] >= 0):
-        print(atual)
-        if tabuleiro[atual[0], atual[1]] == 1:
+    while(j >= 0):
+        if tabuleiro[i, j] == 1:
             return False
-        atual[1] -= 1
-    atual = posicao.copy()
+        j -= 1
+    i,j = posicao
 
-    while(atual[1] <= n-1):
-        print(atual)
-        if tabuleiro[atual[0], atual[1]] == 1:
+    while(i>=0 or j>=0):
+        if tabuleiro[i, j] == 1:
             return False
-        atual[1] += 1
-    atual = posicao.copy()
+        i -= 1
+        j -= 1
+    i,j = posicao
 
-    while(atual[0] >= 0):
-        print(atual)
-        if tabuleiro[atual[0], atual[1]] == 1:
+    while(i<n or j>=0):
+        if tabuleiro[i, j] == 1:
             return False
-        atual[0] -= 1
-    atual = posicao.copy()
-
-    while(atual[0] <= n-1):
-        print(atual)
-        if tabuleiro[atual[0], atual[1]] == 1:
-            return False
-        atual[0] += 1
-    atual = posicao.copy()
+        i += 1
+        j -= 1
     return True
+    
 
 def n_rainhas(n):
     i,j = 2,2
     tabuleiro = np.zeros((n,n))
-    tabuleiro[4,2] = 1
+    tabuleiro[0,0] = 1
     if verificar_rainha(tabuleiro, [i,j]):
         tabuleiro[i,j] = 1
     print(tabuleiro)
