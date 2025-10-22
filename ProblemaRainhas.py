@@ -34,7 +34,6 @@ def n_rainhas(n):
     return busca(0, 0, tabuleiro)
 
 def busca(i, j, tabuleiro):
-    print(" j",j)
     if j >= len(tabuleiro):
         return tabuleiro
     aux = 0
@@ -53,4 +52,4 @@ def busca(i, j, tabuleiro):
 # teste = np.zeros((5,5))
 # teste[1,1] = 1
 
-print(n_rainhas(4))
+print(n_rainhas(10))
