@@ -14,14 +14,14 @@ def verificar_rainha(tabuleiro, posicao):
         j -= 1
     i,j = posicao
 
-    while(i>=0 or j>=0):
+    while(i>=0 and j>=0):
         if tabuleiro[i, j] == 1:
             return False
         i -= 1
         j -= 1
     i,j = posicao
 
-    while(i<n or j>=0):
+    while(i<n and j>=0):
         if tabuleiro[i, j] == 1:
             return False
         i += 1
@@ -30,12 +30,27 @@ def verificar_rainha(tabuleiro, posicao):
     
 
 def n_rainhas(n):
-    i,j = 2,2
     tabuleiro = np.zeros((n,n))
-    tabuleiro[0,0] = 1
-    if verificar_rainha(tabuleiro, [i,j]):
-        tabuleiro[i,j] = 1
-    print(tabuleiro)
-    return tabuleiro
+    return busca(0, 0, tabuleiro)
 
-tabuleiro = n_rainhas(5)
+def busca(i, j, tabuleiro):
+    print(" j",j)
+    if j >= len(tabuleiro):
+        return tabuleiro
+    aux = 0
+    while(aux < len(tabuleiro)):
+        newtab = tabuleiro.copy()
+        check = verificar_rainha(tabuleiro, (aux,j))
+        if check:
+           newtab[aux][j] = 1
+           res = busca(aux, j+1, newtab)
+           if res is not None:
+               return res
+        aux += 1
+    return None
+
+
+# teste = np.zeros((5,5))
+# teste[1,1] = 1
+
+print(n_rainhas(4))
