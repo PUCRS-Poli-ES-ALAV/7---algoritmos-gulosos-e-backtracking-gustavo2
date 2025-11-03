@@ -17,32 +17,28 @@ def subconjunto(a):
     
 
 def percorre(a, index, sc):
-    if len(a) == 0:
-        return None
-    if len(a) == 1 and a[0] == 0:
-        return [0]
-        
+    if len(sc) > 0:
+        soma_atual = sum(sc)
+        if soma_atual == 0:
+            return sc
+    
     if index >= len(a):
         return None
-    if len(sc)>0:
-        sum = 0
 
-        for i in sc:
-            sum += i
-        if sum == 0:
-            return sc
-
-    for i in range(index, len(a)):
-        temp = sc.copy()
-        temp.append(a[i])
-        aux = percorre(a, index + 1, temp)
-        if aux is not None:
-            return aux
+    if len(a) == 0:
+        return None
     
-    aux = percorre(a, index+1, temp)
-    if aux is not None:
-        return aux
-    return percorre(a[1:len(a)], 0, sc)
+    temp_com_elemento = sc.copy()
+    temp_com_elemento.append(a[index])
+    resultado_com = percorre(a, index + 1, temp_com_elemento)
+    if resultado_com is not None:
+        return resultado_com
+    
+    resultado_sem = percorre(a, index + 1, sc)
+    if resultado_sem is not None:
+        return resultado_sem
+    
+    return None
 
 print("Resultado:")
 print(subconjunto([-7, -3, -2, 5, 8]))
@@ -147,14 +143,21 @@ print(f"Resultado: {resultado12}")
 if resultado12:
     print(f"Soma: {sum(resultado12)}")
     
-# Teste 13: Apenas números negativos (sem solução)
-print("\nTeste 4 - pula um:")
-resultado4 = subconjunto([-1, -2, -3, 4])
-print(f"Conjunto: [-1, -2, -3, 4]")
-print(f"Resultado: {resultado4}")
-if resultado4:
-    print(f"Soma: {sum(resultado4)}")
+# Teste 13: Caso especial com um positivo
+print("\nTeste 13 - Um positivo entre negativos:")
+resultado13 = subconjunto([-1, -2, -3, 6])
+print(f"Conjunto: [-1, -2, -3, 6]")
+print(f"Resultado: {resultado13}")
+if resultado13:
+    print(f"Soma: {sum(resultado13)}")
 
+# Teste 14: pula um
+print("\nTeste 14 - Pula um:")
+resultado14 = subconjunto([-1, -2, -3, 4])
+print(f"Conjunto: [-1, -2, -3, 4]")
+print(f"Resultado: {resultado14}")
+if resultado14:
+    print(f"Soma: {sum(resultado14)}")
 
 print("\n" + "="*60)
 print("FIM DOS TESTES")
